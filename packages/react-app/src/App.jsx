@@ -247,7 +247,10 @@ function App(props) {
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
+
+      {/*
       <Header />
+      */}
       <NetworkDisplay
         NETWORKCHECK={NETWORKCHECK}
         localChainId={localChainId}
@@ -256,7 +259,7 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
-      <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
+      <Menu style={{ textAlign: "center", marginTop: 12 }} selectedKeys={[location.pathname]} mode="horizontal">
         <Menu.Item key="/">
           <Link to="/">App Home</Link>
         </Menu.Item>
@@ -370,6 +373,7 @@ function App(props) {
               />
             </div>
           )}
+          {/*
           <Account
             useBurner={USE_BURNER_WALLET}
             address={address}
@@ -382,6 +386,7 @@ function App(props) {
             logoutOfWeb3Modal={logoutOfWeb3Modal}
             blockExplorer={blockExplorer}
           />
+          */}
         </div>
         {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
           <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
@@ -389,6 +394,7 @@ function App(props) {
       </div>
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
+      {/*
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={[4, 4]}>
           <Col span={8}>
@@ -413,11 +419,9 @@ function App(props) {
             </Button>
           </Col>
         </Row>
-
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
             {
-              /*  if the local provider has a signer, let's show the faucet:  */
               faucetAvailable ? (
                 <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
               ) : (
@@ -427,6 +431,7 @@ function App(props) {
           </Col>
         </Row>
       </div>
+      */}
     </div>
   );
 }
