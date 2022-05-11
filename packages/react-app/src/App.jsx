@@ -351,6 +351,9 @@ function App(props) {
             mainnetProvider={mainnetProvider}
           />
         </Route>
+        <Route path="/health">
+          <h3>ok</h3>
+        </Route>
       </Switch>
 
       <ThemeSwitch />
