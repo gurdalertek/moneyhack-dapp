@@ -31,8 +31,8 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
-
 import "./output.css";
+import ExploreView from "./views/ExploreView";
 
 const { ethers } = require("ethers");
 /*
@@ -248,20 +248,13 @@ function App(props) {
 
   return (
     <div className="App">
-      {/* ✏️ Edit the header and change the title to your project name */}
-
-      {/*
-      <Header />
-      */}
-
       <header class="bg-primary">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
           <div class="w-full py-2 flex items-center justify-between border-b border-primary lg:border-none">
             <div class="flex items-center">
-              <a href="/">
-                <span class="sr-only">ReveFin</span>
+              <Link class="text-base font-medium text-black hover:text-white" to="/">
                 <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
-              </a>
+              </Link>
               <div class="hidden ml-10 space-x-8 lg:block">
                 <Link class="text-base font-medium text-black hover:text-white" to="/explore">Explore</Link>
               </div>
@@ -305,7 +298,7 @@ function App(props) {
           <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
         </Route>
         <Route exact path="/explore">
-          <h3>Explore</h3>
+          <ExploreView />
         </Route>
         <Route exact path="/register">
           <h3>Get Capital</h3>
