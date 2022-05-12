@@ -263,22 +263,13 @@ function App(props) {
                 <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
               </a>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <a href="/explore" class="text-base font-medium text-black hover:text-white">
-                  {" "}
-                  Explore{" "}
-                </a>
+                <Link class="text-base font-medium text-black hover:text-white" to="/explore">Explore</Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <a href="/register" class="text-base font-medium text-black hover:text-white">
-                  {" "}
-                  Get Capital{" "}
-                </a>
+                <Link class="text-base font-medium text-black hover:text-white" to="/register">Get Capital</Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <a href="/dashboard" class="text-base font-medium text-black hover:text-white">
-                  {" "}
-                  Dashboard{" "}
-                </a>
+                <Link class="text-base font-medium text-black hover:text-white" to="/dashboard">Dashboard</Link>
               </div>
             </div>
             <div class="ml-10 space-x-4">
@@ -307,31 +298,20 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
-      <Menu style={{ textAlign: "center", marginTop: 12 }} selectedKeys={[location.pathname]} mode="horizontal">
-        <Menu.Item key="/">
-          <Link to="/">App Home</Link>
-        </Menu.Item>
-        <Menu.Item key="/debug">
-          <Link to="/debug">Debug Contracts</Link>
-        </Menu.Item>
-        <Menu.Item key="/hints">
-          <Link to="/hints">Hints</Link>
-        </Menu.Item>
-        <Menu.Item key="/exampleui">
-          <Link to="/exampleui">ExampleUI</Link>
-        </Menu.Item>
-        <Menu.Item key="/mainnetdai">
-          <Link to="/mainnetdai">Mainnet DAI</Link>
-        </Menu.Item>
-        <Menu.Item key="/subgraph">
-          <Link to="/subgraph">Subgraph</Link>
-        </Menu.Item>
-      </Menu>
 
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
           <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+        </Route>
+        <Route exact path="/explore">
+          <h3>Explore</h3>
+        </Route>
+        <Route exact path="/register">
+          <h3>Get Capital</h3>
+        </Route>
+        <Route exact path="/dashboard">
+          <h3>Dashboard</h3>
         </Route>
         <Route exact path="/debug">
           {/*
