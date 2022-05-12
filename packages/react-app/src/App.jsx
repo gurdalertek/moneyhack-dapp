@@ -32,6 +32,8 @@ import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 
+import "./output.css";
+
 const { ethers } = require("ethers");
 /*
     Welcome to 🏗 scaffold-eth !
@@ -251,6 +253,52 @@ function App(props) {
       {/*
       <Header />
       */}
+
+      <header class="bg-primary">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
+          <div class="w-full py-2 flex items-center justify-between border-b border-primary lg:border-none">
+            <div class="flex items-center">
+              <a href="/">
+                <span class="sr-only">ReveFin</span>
+                <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
+              </a>
+              <div class="hidden ml-10 space-x-8 lg:block">
+                <a href="/explore" class="text-base font-medium text-black hover:text-white">
+                  {" "}
+                  Explore{" "}
+                </a>
+              </div>
+              <div class="hidden ml-10 space-x-8 lg:block">
+                <a href="/register" class="text-base font-medium text-black hover:text-white">
+                  {" "}
+                  Get Capital{" "}
+                </a>
+              </div>
+              <div class="hidden ml-10 space-x-8 lg:block">
+                <a href="/dashboard" class="text-base font-medium text-black hover:text-white">
+                  {" "}
+                  Dashboard{" "}
+                </a>
+              </div>
+            </div>
+            <div class="ml-10 space-x-4">
+              <Account
+                useBurner={USE_BURNER_WALLET}
+                address={address}
+                localProvider={localProvider}
+                userSigner={userSigner}
+                mainnetProvider={mainnetProvider}
+                price={price}
+                web3Modal={web3Modal}
+                loadWeb3Modal={loadWeb3Modal}
+                logoutOfWeb3Modal={logoutOfWeb3Modal}
+                blockExplorer={blockExplorer}
+              />
+            </div>
+          </div>
+        </nav>
+      </header>
+
       <NetworkDisplay
         NETWORKCHECK={NETWORKCHECK}
         localChainId={localChainId}
@@ -373,20 +421,6 @@ function App(props) {
               />
             </div>
           )}
-          {/*
-          <Account
-            useBurner={USE_BURNER_WALLET}
-            address={address}
-            localProvider={localProvider}
-            userSigner={userSigner}
-            mainnetProvider={mainnetProvider}
-            price={price}
-            web3Modal={web3Modal}
-            loadWeb3Modal={loadWeb3Modal}
-            logoutOfWeb3Modal={logoutOfWeb3Modal}
-            blockExplorer={blockExplorer}
-          />
-          */}
         </div>
         {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
           <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
