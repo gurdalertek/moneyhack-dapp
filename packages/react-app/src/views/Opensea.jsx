@@ -3,10 +3,22 @@ import React, { useState } from "react";
 import { utils } from "ethers";
 
 import { useTokenList } from "eth-hooks/dapps/dex";
-import { Address, AddressInput } from "../components";
+import { Address, AddressInput, Balance, Events } from "../components";
 import { OpenSeaPort, Network, api } from 'opensea-js';
 
+
+
+//////
+import { Button, Card, DatePicker, Divider, Input, Progress, Slider, Spin, Switch } from "antd";
+//import React, { useState } from "react";
+//import { utils } from "ethers";
+import { SyncOutlined } from "@ant-design/icons";
+
+
 const { Option } = Select;
+
+
+//import { Address, Balance, Events } from "../components";
 
 
 // This example provider won't let you make transactions, only read-only calls:
@@ -21,272 +33,243 @@ const { Option } = Select;
 //   apiKey: Yd2ea5d9f73ec4839a5dfa39edfbd4e9b
 // })
 
-export default function Opensea({ yourLocalBalance, mainnetProvider, price, address }) {
-  // Get a list of tokens from a tokenlist -> see tokenlists.org!
-  const [selectedToken, setSelectedToken] = useState("Pick a token!");
-  const listOfTokens = useTokenList(
-    "https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json",
-  );
+// export default function Opensea({ yourLocalBalance, mainnetProvider, price, address }) {
+//   // Get a list of tokens from a tokenlist -> see tokenlists.org!
+//   const [selectedToken, setSelectedToken] = useState("Pick a token!");
+//   const listOfTokens = useTokenList(
+//     "https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json",
+//   );
+
+//   const sdk = require('api')('@opensea/v1.0#595ks1ol33d7wpk');
+
+//   sdk['retrieving-collection-stats']({collection_slug: 'doodles-official'})
+//      .then(res => console.log(res))
+//      .catch(err => console.error(err));
+
+
+
+export default function Opensea({
+  purpose,
+  address,
+  mainnetProvider,
+  localProvider,
+  yourLocalBalance,
+  price,
+  tx,
+  readContracts,
+  writeContracts,
+}) {
+  const [newPurpose, setNewPurpose] = useState("loading...");
+      // Constructor 
+
+
 
   const sdk = require('api')('@opensea/v1.0#595ks1ol33d7wpk');
 
   sdk['retrieving-collection-stats']({collection_slug: 'doodles-official'})
      .then(res => console.log(res))
      .catch(err => console.error(err));
-
-
+  console.log('-----------------------------');
+  console.log("-----------------------------OPENSEA");
+  console.log("-----------------------------");
 
   return (
     <div>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>👷</span>
-        Edit your <b>contract</b> in
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/hardhat/contracts
-        </span>
-      </div>
-
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🛰</span>
-        <b>compile/deploy</b> with
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run deploy
-        </span>
-      </div>
-
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🚀</span>
-        Your <b>contract artifacts</b> are automatically injected into your frontend at
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/react-app/src/contracts/
-        </span>
-      </div>
-
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🎛</span>
-        Edit your <b>frontend</b> in
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/reactapp/src/App.js
-        </span>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>🔭</span>
-        explore the
-        <span
-          className="highlight"
-          style={{
-            marginLeft: 4,
-            marginRight: 4,
-            /* backgroundColor: "#f9f9f9", */
-            padding: 4,
-            borderRadius: 4,
-            fontWeight: "bolder",
-          }}
-        >
-          🖇 hooks
-        </span>
-        and
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          📦 components
-        </span>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        for example, the
-        <span
-          className="highlight"
-          style={{ margin: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          useBalance()
-        </span>{" "}
-        hook keeps track of your balance: <b>{utils.formatEther(yourLocalBalance || 0)}</b>
-      </div>
-
-      <div style={{ margin: 8 }}>
-        <div>
-          <b>useTokenList()</b> can get you an array of tokens from{" "}
-          <a href="https://tokenlists.org" target="_blank" rel="noopener noreferrer">
-            tokenlists.org!
-          </a>
-        </div>
-        <Select
-          showSearch
-          value={selectedToken}
-          onChange={value => {
-            console.log(`selected ${value}`);
-            setSelectedToken(value);
-          }}
-          filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-          optionFilterProp="children"
-        >
-          {listOfTokens.map(token => (
-            <Option key={token.address + "_" + token.symbol} value={token.symbol}>
-              {token.symbol}
-            </Option>
-          ))}
-        </Select>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        as you build your app you&apos;ll need web3 specific components like an
-        <span
-          className="highlight"
-          style={{ margin: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          {"<AddressInput/>"}
-        </span>
-        component:
-        <div style={{ width: 350, padding: 16, margin: "auto" }}>
-          <AddressInput ensProvider={mainnetProvider} />
-        </div>
-        <div>(try putting in your address, an ens address, or scanning a QR code)</div>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        this balance could be multiplied by
-        <span
-          className="highlight"
-          style={{ margin: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          price
-        </span>{" "}
-        that is loaded with the
-        <span
-          className="highlight"
-          style={{ margin: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          usePrice
-        </span>{" "}
-        hook with the current value: <b>${price}</b>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>💧</span>
-        use the <b>faucet</b> to send funds to
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          <Address address={address} minimized /> {address}
-        </span>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>📡</span>
-        deploy to a testnet or mainnet by editing
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/hardhat/hardhat.config.js
-        </span>
-        and running
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run deploy
-        </span>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>🔑</span>
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run generate
-        </span>
-        will create a deployer account in
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/hardhat
-        </span>
-        <div style={{ marginTop: 8 }}>
-          (use{" "}
-          <span
-            className="highlight"
-            style={{
-              marginLeft: 4,
-              /* backgroundColor: "#f1f1f1", */ padding: 4,
-              borderRadius: 4,
-              fontWeight: "bolder",
+      {/*
+        ⚙️ Here is an example UI that displays and sets the purpose in your smart contract:
+      */}
+      <div style={{ border: "1px solid #cccccc", padding: 16, width: 400, margin: "auto", marginTop: 64 }}>
+        <h2>Example UI:</h2>
+        <h4>purpose: {purpose}</h4>
+        <Divider />
+        <div style={{ margin: 8 }}>
+          <Input
+            onChange={e => {
+              setNewPurpose(e.target.value);
+            }}
+          />
+          <Button
+            style={{ marginTop: 8 }}
+            onClick={async () => {
+              /* look how you call setPurpose on your contract: */
+              /* notice how you pass a call back for tx updates too */
+              const result = tx(writeContracts.YourContract.setPurpose(newPurpose), update => {
+                console.log("📡 Transaction Update:", update);
+                if (update && (update.status === "confirmed" || update.status === 1)) {
+                  console.log(" 🍾 Transaction " + update.hash + " finished!");
+                  console.log(
+                    " ⛽️ " +
+                      update.gasUsed +
+                      "/" +
+                      (update.gasLimit || update.gas) +
+                      " @ " +
+                      parseFloat(update.gasPrice) / 1000000000 +
+                      " gwei",
+                  );
+                }
+              });
+              console.log("awaiting metamask/web3 confirm result...", result);
+              console.log(await result);
             }}
           >
-            yarn run account
-          </span>{" "}
-          to display deployer address and balance)
+            Set Purpose!
+          </Button>
+        </div>
+        <Divider />
+        Your Address:
+        <Address address={address} ensProvider={mainnetProvider} fontSize={16} />
+        <Divider />
+        ENS Address Example:
+        <Address
+          address="0x34aA3F359A9D614239015126635CE7732c18fDF3" /* this will show as austingriffith.eth */
+          ensProvider={mainnetProvider}
+          fontSize={16}
+        />
+        <Divider />
+        {/* use utils.formatEther to display a BigNumber: */}
+        <h2>Your Balance: {yourLocalBalance ? utils.formatEther(yourLocalBalance) : "..."}</h2>
+        <div>OR</div>
+        <Balance address={address} provider={localProvider} price={price} />
+        <Divider />
+        <div>🐳 Example Whale Balance:</div>
+        <Balance balance={utils.parseEther("1000")} provider={localProvider} price={price} />
+        <Divider />
+        {/* use utils.formatEther to display a BigNumber: */}
+        <h2>Your Balance: {yourLocalBalance ? utils.formatEther(yourLocalBalance) : "..."}</h2>
+        <Divider />
+        Your Contract Address:
+        <Address
+          address={readContracts && readContracts.YourContract ? readContracts.YourContract.address : null}
+          ensProvider={mainnetProvider}
+          fontSize={16}
+        />
+        <Divider />
+        <div style={{ margin: 8 }}>
+          <Button
+            onClick={() => {
+              /* look how you call setPurpose on your contract: */
+              tx(writeContracts.YourContract.setPurpose("🍻 Cheers"));
+            }}
+          >
+            Set Purpose to &quot;🍻 Cheers&quot;
+          </Button>
+        </div>
+        <div style={{ margin: 8 }}>
+          <Button
+            onClick={() => {
+              /*
+              you can also just craft a transaction and send it to the tx() transactor
+              here we are sending value straight to the contract's address:
+            */
+              tx({
+                to: writeContracts.YourContract.address,
+                value: utils.parseEther("0.001"),
+              });
+              /* this should throw an error about "no fallback nor receive function" until you add it */
+            }}
+          >
+            Send Value
+          </Button>
+        </div>
+        <div style={{ margin: 8 }}>
+          <Button
+            onClick={() => {
+              /* look how we call setPurpose AND send some value along */
+              tx(
+                writeContracts.YourContract.setPurpose("💵 Paying for this one!", {
+                  value: utils.parseEther("0.001"),
+                }),
+              );
+              /* this will fail until you make the setPurpose function payable */
+            }}
+          >
+            Set Purpose With Value
+          </Button>
+        </div>
+        <div style={{ margin: 8 }}>
+          <Button
+            onClick={() => {
+              /* you can also just craft a transaction and send it to the tx() transactor */
+              tx({
+                to: writeContracts.YourContract.address,
+                value: utils.parseEther("0.001"),
+                data: writeContracts.YourContract.interface.encodeFunctionData("setPurpose(string)", [
+                  "🤓 Whoa so 1337!",
+                ]),
+              });
+              /* this should throw an error about "no fallback nor receive function" until you add it */
+            }}
+          >
+            Another Example
+          </Button>
         </div>
       </div>
 
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>⚙️</span>
-        build your app with
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run build
-        </span>
-      </div>
+      {/*
+        📑 Maybe display a list of events?
+          (uncomment the event and emit line in YourContract.sol! )
+      */}
+      <Events
+        contracts={readContracts}
+        contractName="YourContract"
+        eventName="SetPurpose"
+        localProvider={localProvider}
+        mainnetProvider={mainnetProvider}
+        startBlock={1}
+      />
 
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>🚢</span>
-        ship it!
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run surge
-        </span>
-        or
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run s3
-        </span>
-        or
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f1f1f1", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          yarn run ipfs
-        </span>
-      </div>
-
-      <div style={{ marginTop: 32 }}>
-        <span style={{ marginRight: 8 }}>💬</span>
-        for support, join this
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          <a target="_blank" rel="noopener noreferrer" href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA">
-            Telegram Chat
+      <div style={{ width: 600, margin: "auto", marginTop: 32, paddingBottom: 256 }}>
+        <Card>
+          Check out all the{" "}
+          <a
+            href="https://github.com/austintgriffith/scaffold-eth/tree/master/packages/react-app/src/components"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📦 components
           </a>
-        </span>
-      </div>
-      <div style={{ padding: 128 }}>
-        🛠 Check out your browser&apos;s developer console for more... (inspect console) 🚀
+        </Card>
+
+        <Card style={{ marginTop: 32 }}>
+          <div>
+            There are tons of generic components included from{" "}
+            <a href="https://ant.design/components/overview/" target="_blank" rel="noopener noreferrer">
+              🐜 ant.design
+            </a>{" "}
+            too!
+          </div>
+
+          <div style={{ marginTop: 8 }}>
+            <Button type="primary">Buttons</Button>
+          </div>
+
+          <div style={{ marginTop: 8 }}>
+            <SyncOutlined spin /> Icons
+          </div>
+
+          <div style={{ marginTop: 8 }}>
+            Date Pickers?
+            <div style={{ marginTop: 2 }}>
+              <DatePicker onChange={() => {}} />
+            </div>
+          </div>
+
+          <div style={{ marginTop: 32 }}>
+            <Slider range defaultValue={[20, 50]} onChange={() => {}} />
+          </div>
+
+          <div style={{ marginTop: 32 }}>
+            <Switch defaultChecked onChange={() => {}} />
+          </div>
+
+          <div style={{ marginTop: 32 }}>
+            <Progress percent={50} status="active" />
+          </div>
+
+          <div style={{ marginTop: 32 }}>
+            <Spin />
+          </div>
+        </Card>
       </div>
     </div>
   );
