@@ -4,8 +4,22 @@ import { utils } from "ethers";
 
 import { useTokenList } from "eth-hooks/dapps/dex";
 import { Address, AddressInput } from "../components";
+import { OpenSeaPort, Network, api } from 'opensea-js';
 
 const { Option } = Select;
+
+
+// This example provider won't let you make transactions, only read-only calls:
+// const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+//const provider = new Web3.providers.HttpProvider('https://mainnet.infura.io')
+
+// Using HTTPS
+// const provider = createAlchemyWeb3("https://eth-mainnet.alchemyapi.io/v2/xsmVHANuiGh7_R6XufR116gGAUis4cTC");
+
+// const seaport = new OpenSeaPort(provider, {
+//   networkName: Network.Main,
+//   apiKey: Yd2ea5d9f73ec4839a5dfa39edfbd4e9b
+// })
 
 export default function Opensea({ yourLocalBalance, mainnetProvider, price, address }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
@@ -13,6 +27,12 @@ export default function Opensea({ yourLocalBalance, mainnetProvider, price, addr
   const listOfTokens = useTokenList(
     "https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json",
   );
+
+  const sdk = require('api')('@opensea/v1.0#595ks1ol33d7wpk');
+
+  sdk['retrieving-collection-stats']({collection_slug: 'doodles-official'})
+     .then(res => console.log(res))
+     .catch(err => console.error(err));
 
 
 
