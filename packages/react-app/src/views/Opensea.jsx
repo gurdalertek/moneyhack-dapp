@@ -30,7 +30,7 @@ const { Option } = Select;
 
 // const seaport = new OpenSeaPort(provider, {
 //   networkName: Network.Main,
-//   apiKey: Yd2ea5d9f73ec4839a5dfa39edfbd4e9b
+//   apiKey: 
 // })
 
 // export default function Opensea({ yourLocalBalance, mainnetProvider, price, address }) {
