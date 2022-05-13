@@ -3,6 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 
 import nftReducer, { nftProjectsSelector } from "./reducers/nft";
+import logger from "./middlewares/logger";
 
 const combinedReducer = combineReducers({
   nft: nftReducer,
@@ -11,7 +12,7 @@ const combinedReducer = combineReducers({
 export const makeStore = () =>
   configureStore({
     reducer: combinedReducer,
-    middleware: [],
+    middleware: [logger],
   });
 
 export const store = makeStore();

@@ -34,6 +34,7 @@ import { useStaticJsonRPC } from "./hooks";
 
 import "./output.css";
 import ExploreView from "./views/ExploreView";
+import BidView from "./views/BidView";
 
 const { ethers } = require("ethers");
 /*
@@ -306,6 +307,9 @@ function App(props) {
         </Route>
         <Route exact path="/explore">
           <ExploreView />
+        </Route>
+        <Route exact path="/bid">
+          <BidView />
         </Route>
         <Route exact path="/register">
           <h3>Get Capital</h3>
