@@ -31,6 +31,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+
 import "./output.css";
 import ExploreView from "./views/ExploreView";
 
@@ -256,13 +257,19 @@ function App(props) {
                 <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
               </Link>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/explore">Explore</Link>
+                <Link class="text-base font-medium text-black hover:text-white" to="/explore">
+                  Explore
+                </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/register">Get Capital</Link>
+                <Link class="text-base font-medium text-black hover:text-white" to="/register">
+                  Get Capital
+                </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/dashboard">Dashboard</Link>
+                <Link class="text-base font-medium text-black hover:text-white" to="/dashboard">
+                  Dashboard
+                </Link>
               </div>
             </div>
             <div class="ml-10 space-x-4">
