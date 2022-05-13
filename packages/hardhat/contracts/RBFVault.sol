@@ -15,7 +15,7 @@ contract RBFVault is PaymentSplitter {
     constructor(
         address _collectionAddress,
         address[2] _parties,
-        int256[2] _shares
+        uint256[2] _shares
     ) PaymentSplitter(_parties, _shares) {
         collectionAddress = _collectionAddress;
         collectionOwner = _parties[1];

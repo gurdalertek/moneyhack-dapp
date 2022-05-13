@@ -11,9 +11,9 @@ contract RBFVaultFactory {
     );
 
     mapping(address => address) public collectionVault;
-    modifier collectionVaultDoesntExist(address _collectionAddress) {
+    modifier collectionVaultDoesntExist(address collectionAddress) {
         require(
-            _collectionAddress == address(0),
+            collectionAddress == address(0),
             "Vault for this collection already exist"
         );
         _;
@@ -26,26 +26,26 @@ contract RBFVaultFactory {
     }
 
     modifier isValidAddress(
-        address _collectionAddress,
-        address _collectionOwner,
-        address _investorAddress
+        address collectionAddress,
+        address collectionOwner,
+        address investorAddress
     ) {
         require(
-            _collectionAddress != address(0),
+            collectionAddress != address(0),
             "Collection can not be the 0 address"
         );
         require(
-            _collectionOwner != address(0),
+            collectionOwner != address(0),
             "Collection owner can not be the 0 address"
         );
 
         require(
-            _investorAddress != address(0),
+            investorAddress != address(0),
             "Investor can not be the 0 address"
         );
 
         require(
-            _collectionOwner != _investorAddress,
+            collectionOwner != investorAddress,
             "Collection owner can not be the investor"
         );
 
@@ -53,16 +53,16 @@ contract RBFVaultFactory {
     }
 
     function createVault(
-        address _collectionAddress,
-        address _collectionOwner,
-        address _investorAddress,
-        uint256 _investorShare
+        address collectionAddress,
+        address collectionOwner,
+        address investorAddress,
+        uint256 investorShare
     ) external collectionVaultDoesntExist isValidAddress sharesIsValid {
-        address[2] memory parties = [_investorAddress, _collectionOwner];
-        uint256[2] memory shares = [_investorShare, 100 - _investorShare];
-        RBFVault vault = new RBFVault(_collectionAddress, parties, shares);
-        collectionVault[_collectionAddress] = address(vault);
+        address[2] memory parties = [investorAddress, collectionOwner];
+        uint256[2] memory shares = [investorShare, 100 - investorShare];
+        RBFVault vault = new RBFVault(collectionAddress, parties, shares);
+        collectionVault[collectionAddress] = address(vault);
 
-        emit RBFVaultCreated(_collectionAddress, address(vault));
+        emit RBFVaultCreated(collectionAddress, address(vault));
     }
 }
