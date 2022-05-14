@@ -24,7 +24,7 @@ const PercentageSlider = ({
       handleStyle={{ borderColor: COLOR_WHITE }}
       min={min}
       max={max}
-      tipFormatter={sliderValueFormatter}
+      tipFormatter={null}
       defaultValue={defaultValue}
       onChange={onChange}
     />

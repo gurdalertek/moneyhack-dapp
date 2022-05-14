@@ -35,7 +35,7 @@ import { useStaticJsonRPC } from "./hooks";
 import "./output.css";
 import ExploreView from "./views/ExploreView";
 import BidView from "./views/BidView";
-import ListNFTView from "./views/ListNFTView";
+import AddNFTView from "./views/AddNFTView";
 
 const { ethers } = require("ethers");
 /*
@@ -264,7 +264,7 @@ function App(props) {
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-navtext hover:text-highlight" to="/listnft">
+                <Link class="text-base font-medium text-navtext hover:text-highlight" to="/addnft">
                   Get Capital
                 </Link>
               </div>
@@ -312,8 +312,8 @@ function App(props) {
         <Route exact path="/bid">
           <BidView />
         </Route>
-        <Route exact path="/listnft">
-          <ListNFTView />
+        <Route exact path="/addnft">
+          <AddNFTView />
         </Route>
         <Route exact path="/dashboard">
           <h3>Dashboard</h3>
