@@ -252,23 +252,23 @@ function App(props) {
     <div className="App">
       <header class="bg-primary">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-          <div class="w-full py-2 flex items-center justify-between border-b border-primary lg:border-none">
+          <div class="w-full py-3 flex items-center justify-between border-b border-primary lg:border-none">
             <div class="flex items-center">
-              <Link class="text-base font-medium text-black hover:text-white" to="/">
+              <Link class="text-base font-medium text-black hover:text-secondary" to="/">
                 <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
               </Link>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/explore">
+                <Link class="text-base font-medium text-black hover:text-secondary" to="/explore">
                   Explore
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/register">
+                <Link class="text-base font-medium text-black hover:text-secondary" to="/register">
                   Get Capital
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-white" to="/dashboard">
+                <Link class="text-base font-medium text-black hover:text-secondary" to="/dashboard">
                   Dashboard
                 </Link>
               </div>

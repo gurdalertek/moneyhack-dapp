@@ -1,7 +1,12 @@
 import React from "react";
 import { Slider } from "antd";
 
-import { DEFAULT_BID_SLIDER_PERCENTAGE, BID_SLIDER_MIN_PERCENTAGE, BID_SLIDER_MAX_PERCENTAGE } from "../../constants";
+import {
+  DEFAULT_BID_SLIDER_PERCENTAGE,
+  BID_SLIDER_MIN_PERCENTAGE,
+  BID_SLIDER_MAX_PERCENTAGE,
+  COLOR_WHITE,
+} from "../../constants";
 
 const PercentageSlider = ({
   min = BID_SLIDER_MIN_PERCENTAGE,
@@ -14,7 +19,15 @@ const PercentageSlider = ({
   };
 
   return (
-    <Slider min={min} max={max} tipFormatter={sliderValueFormatter} defaultValue={defaultValue} onChange={onChange} />
+    <Slider
+      trackStyle={{ backgroundColor: COLOR_WHITE }}
+      handleStyle={{ borderColor: COLOR_WHITE }}
+      min={min}
+      max={max}
+      tipFormatter={sliderValueFormatter}
+      defaultValue={defaultValue}
+      onChange={onChange}
+    />
   );
 };
 
