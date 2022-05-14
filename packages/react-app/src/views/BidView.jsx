@@ -7,6 +7,7 @@ import NFTProjectCard from "../components/NFTProject/NFTProjectCard";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import PercentageSlider from "../components/Inputs/PercentageSlider";
 import HeaderText from "../components/Commons/HeaderText";
+import { getFormatedCurrencyValue } from "../utils/commons";
 
 const BidView = () => {
   const selectedNftProject = useSelector(nftSelectedProjectSelector);
@@ -29,7 +30,7 @@ const BidView = () => {
           <h3 class="text-white">{bidPercentage}% of Revenue</h3>
           <PercentageSlider onChange={onSliderValueChange} />
         </div>
-        <SecondaryButton onClick={() => {}} children={"BID " + bidAmount + " DAI"} />
+        <SecondaryButton onClick={() => {}} children={"BID " + getFormatedCurrencyValue(bidAmount)} />
       </div>
     </div>
   );
