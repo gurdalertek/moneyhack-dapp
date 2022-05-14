@@ -11,7 +11,7 @@ const ExploreView = () => {
   return (
     <div>
       <HeaderText children="NFT Collections" />
-      <NFTProjectCardsList nftProjects={activeNftProjects} />;
+      <NFTProjectCardsList nftProjects={activeNftProjects} />
     </div>
   );
 };

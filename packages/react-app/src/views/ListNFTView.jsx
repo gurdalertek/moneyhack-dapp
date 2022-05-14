@@ -9,7 +9,7 @@ import PercentageSlider from "../components/Inputs/PercentageSlider";
 import HeaderText from "../components/Commons/HeaderText";
 import { getFormatedCurrencyValue } from "../utils/commons";
 
-const BidView = () => {
+const ListNFTView = () => {
   const selectedNftProject = useSelector(nftSelectedProjectSelector);
   const [bidAmount, setBidAmount] = useState(selectedNftProject?.estAnnualizedRevenue || DEFAULT_EST_ANN_REVENUE);
   const [bidPercentage, setBidPercentage] = useState(DEFAULT_BID_SLIDER_PERCENTAGE);
@@ -21,7 +21,7 @@ const BidView = () => {
 
   return (
     <div>
-      <HeaderText children="NFT Collection Royalty Revenue" />
+      <HeaderText children="Turn Future Revenue To Capital Now" />
       <div class="mx-10 my-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
         <NFTProjectCard nftProject={selectedNftProject} />
       </div>
@@ -36,4 +36,4 @@ const BidView = () => {
   );
 };
 
-export default BidView;
+export default ListNFTView;

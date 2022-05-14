@@ -3,7 +3,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        navtext: "#041727",
+        navbg: "#f4f5f5",
+        highlight: "#4F46E5",
+        textonhighlight: "#041727",
         primary: "#f4f5f5",
+        primarytext: "#f4f5f5",
         secondary: "#4F46E5",
         secondarylight: "#8B5CF6",
         black: "#041727",

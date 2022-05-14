@@ -35,6 +35,7 @@ import { useStaticJsonRPC } from "./hooks";
 import "./output.css";
 import ExploreView from "./views/ExploreView";
 import BidView from "./views/BidView";
+import ListNFTView from "./views/ListNFTView";
 
 const { ethers } = require("ethers");
 /*
@@ -254,21 +255,21 @@ function App(props) {
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
           <div class="w-full py-3 flex items-center justify-between border-b border-primary lg:border-none">
             <div class="flex items-center">
-              <Link class="text-base font-medium text-black hover:text-secondary" to="/">
+              <Link class="text-base font-medium text-navtext hover:text-highlight" to="/">
                 <img class="h-10 w-auto" src="logo_black_48.png" alt=""></img>
               </Link>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-secondary" to="/explore">
+                <Link class="text-base font-medium text-navtext hover:text-highlight" to="/explore">
                   Explore
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-secondary" to="/listnft">
+                <Link class="text-base font-medium text-navtext hover:text-highlight" to="/listnft">
                   Get Capital
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-secondary" to="/dashboard">
+                <Link class="text-base font-medium text-navtext hover:text-highlight" to="/dashboard">
                   Dashboard
                 </Link>
               </div>
@@ -312,7 +313,7 @@ function App(props) {
           <BidView />
         </Route>
         <Route exact path="/listnft">
-          <h3>Get Capital</h3>
+          <ListNFTView />
         </Route>
         <Route exact path="/dashboard">
           <h3>Dashboard</h3>

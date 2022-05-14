@@ -17,7 +17,7 @@ const NFTProjectCard = ({ nftProject }) => {
   return (
     <div class="relative">
       <div
-        class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-white overflow-hidden"
+        class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-primary overflow-hidden"
         onClick={async () => {
           await dispatch(selectedProjectUpdatedAction(nftProject));
           history.push("/bid");
