@@ -6,6 +6,7 @@ import { nftSelectedProjectSelector } from "../stores/reducers/nft";
 import NFTProjectCard from "../components/NFTProject/NFTProjectCard";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import PercentageSlider from "../components/Inputs/PercentageSlider";
+import HeaderText from "../components/Commons/HeaderText";
 
 const BidView = () => {
   const selectedNftProject = useSelector(nftSelectedProjectSelector);
@@ -19,6 +20,7 @@ const BidView = () => {
 
   return (
     <div>
+      <HeaderText children="NFT Collection Royalty Revenue" />
       <div class="mx-10 my-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
         <NFTProjectCard nftProject={selectedNftProject} />
       </div>

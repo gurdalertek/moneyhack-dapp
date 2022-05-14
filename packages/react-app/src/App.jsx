@@ -263,7 +263,7 @@ function App(props) {
                 </Link>
               </div>
               <div class="hidden ml-10 space-x-8 lg:block">
-                <Link class="text-base font-medium text-black hover:text-secondary" to="/register">
+                <Link class="text-base font-medium text-black hover:text-secondary" to="/listnft">
                   Get Capital
                 </Link>
               </div>
@@ -311,7 +311,7 @@ function App(props) {
         <Route exact path="/bid">
           <BidView />
         </Route>
-        <Route exact path="/register">
+        <Route exact path="/listnft">
           <h3>Get Capital</h3>
         </Route>
         <Route exact path="/dashboard">
